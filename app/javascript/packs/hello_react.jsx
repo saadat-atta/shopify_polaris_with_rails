@@ -28,7 +28,7 @@ const Hello = props => {
 
     }, [])
     return (
-        <Page title="Products">
+        <Page title="Notifications">
             {products && products.map((product, index) => (
                 <Card key={index}
                       title={product.title}
