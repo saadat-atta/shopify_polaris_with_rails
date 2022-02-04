@@ -2,15 +2,15 @@
 
 class NotificationsController < AuthenticatedController
   skip_before_action :verify_authenticity_token
-  # def index
-  #   @products = ShopifyAPI::Product.find(:all, params: { limit: 10 })
-  #   render(json: { products: @products })
-  # end
+
+  def index
+    notification = current_shop.notification
+    render json: {notification: notification.as_json}, status: :ok
+  end
 
   def create
-    shop_domain = ShopifyAPI::Shop.current.domain
-    shop = Shop.find_by(shopify_domain: shop_domain)
-    notification = shop.create_notification(notification_params)
+
+    notification = current_shop.create_notification(notification_params)
 
     if notification.save
       render json: {message: "Notification created successfully"}, status: :created

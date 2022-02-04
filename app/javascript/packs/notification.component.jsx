@@ -44,7 +44,25 @@ const Notification = props => {
     }
 
     useEffect(() => {
-        //TODO: Get values of FORM from API
+        setTimeout(()=>{
+            fetch("/notifications", {
+                headers: {
+                    "Authorization": "Bearer " + window.sessionToken
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const {notification} = data;
+                    if (notification) {
+                        setForm({
+                            title: notification.title,
+                            color: notification.color,
+                            background_color: notification.backgroundColor
+                        })
+                    }
+                });
+        },2000)
+
     }, [])
 
     const renderToast = () => {
