@@ -9,7 +9,6 @@ class NotificationsController < AuthenticatedController
   end
 
   def create
-
     notification = current_shop.create_notification(notification_params)
 
     if notification.save
